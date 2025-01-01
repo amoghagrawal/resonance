@@ -56,6 +56,7 @@ body {
 .slider {
     flex: 1;
     -webkit-appearance: none;
+    appearance: none;
     height: 4px;
     background: #444;
     border-radius: 2px;
@@ -73,17 +74,33 @@ body {
 }
 
 .button {
-    background: #222;
-    border: 1px solid #00ff88;
-    color: #00ff88;
-    padding: 15px;
-    border-radius: 5px;
-    width: 100%;
-    margin: 5px 0;
-    font-size: 16px;
-    font-family: 'Courier New', monospace;
     cursor: pointer;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #00ff88;
+    background: #222;
+    color: #00ff88;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    display: block;
+    text-align: center;
+    line-height: 1.2;
+    margin: 5px 0;
     transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    position: relative;
+    z-index: 1;
+    pointer-events: auto;
+}
+
+.button:hover {
+    background: #333;
+}
+
+.button:active {
+    transform: scale(0.98);
 }
 
 .button.active {
@@ -92,8 +109,35 @@ body {
 }
 
 select.button {
-    background: #222;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%2300ff88'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    padding-right: 35px;
+    background-color: #222;
+    border: 1px solid #00ff88;
     color: #00ff88;
+    transition: background-color 0.3s ease;
+}
+
+select.button:hover {
+    background-color: #333;
+}
+
+select.button:focus {
+    outline: none;
+    background-color: #333;
+}
+
+select.button {
+    transform: none !important;
+}
+
+select.button:active {
+    transform: none !important;
 }
 
 .led {
@@ -209,6 +253,10 @@ input:checked + .switch-slider:before {
     color: #111;
 }
 
+.module[data-filter="true"] select.button {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23FFD700'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+}
+
 .module[data-effect="true"] h2 {
     color: #FF00FF;
 }
@@ -236,6 +284,10 @@ input:checked + .switch-slider:before {
     color: #111;
 }
 
+.module[data-effect="true"] select.button {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23FF00FF'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+}
+
 canvas#oscilloscope {
     width: 100%;
     height: 200px;
@@ -246,9 +298,11 @@ canvas#oscilloscope {
 }
 
 .preset-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    pointer-events: auto;
 }
 
 .sequencer-grid {
@@ -283,32 +337,13 @@ canvas#oscilloscope {
     gap: 10px;
 }
 
-.button {
-    background: #222;
-    border: 1px solid #00ff88;
-    color: #00ff88;
-    padding: 15px;
-    border-radius: 5px;
-    width: 100%;
-    margin: 5px 0;
-    font-size: 16px;
-    font-family: 'Courier New', monospace;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.button.active {
-    background: #00ff88;
-    color: #111;
-}
-
 .menu-container {
+    background: linear-gradient(145deg, #111111ee, #1a1a1aee);
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(145deg, #111111, #1a1a1a);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -321,7 +356,35 @@ canvas#oscilloscope {
     filter: blur(5px);
 }
 
+.menu-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(#00ff88 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.1;
+  z-index: -1;
+  animation: halftoneFloat 30s linear infinite;
+}
+
+@keyframes halftoneFloat {
+  0% {
+    background-position: 0 0;
+  }
+  100% { 
+    background-position: 30px 30px;
+  }
+}
+
 .menu-title {
+    text-shadow: 0 0 10px rgba(0,255,136,0.5),
+                 0 0 20px rgba(0,255,136,0.3),
+                 0 0 30px rgba(0,255,136,0.2);
+    position: relative;
+    z-index: 1;
     color: #00ff88;
     font-size: 5em;
     text-transform: uppercase;
@@ -332,7 +395,9 @@ canvas#oscilloscope {
 }
 
 .menu-button {
-    background: transparent;
+    position: relative;
+    z-index: 1;
+    background: #111111dd;
     border: 2px solid #00ff88;
     color: #00ff88;
     padding: 15px 40px;
@@ -426,4 +491,54 @@ canvas#oscilloscope {
 
 .popup-notification.show {
     opacity: 1;
+}
+
+.fully-clickable {
+    display: block;
+    width: 100%;
+}
+
+.fully-clickable * {
+    pointer-events: none;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1002;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+    border: 1px solid #00ff88;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.modal-content h2 {
+    color: #00ff88;
+    margin-bottom: 20px;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-buttons .menu-button {
+    width: 100%;
+    min-width: 250px;
 }

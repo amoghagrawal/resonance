@@ -1,430 +1,449 @@
-<html><head><base href = ".">;
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resonance</title>
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
-<div class="menu-container" id="mainMenu">
-    <h1 class="menu-title">RESONANCE</h1>
-    <button class="menu-button" id="startButton">Start</button>
-    <button class="menu-button" id="instructionsButton">Instructions</button>
-</div>
-
-<div class="instructions-modal" id="instructionsModal">
-    <button class="close-button" id="closeInstructions">&#xd7;</button>
-    <h2 class="instructions-title">How to Use</h2>
-    <div class="instructions-text">
-        <p>Here&apos;s how to get started:</p>
-        <ul>
-            <li>Use the VCO (Voltage Controlled Oscillator) to generate basic waveforms</li>
-            <li>Apply filters and effects by toggling their switches and adjusting parameters</li>
-            <li>The Envelope controls how the sound evolves over time</li>
-            <li>Use the LFO to add modulation to your sound</li>
-            <li>The sequencer allows you to create melodic patterns</li>
-            <li>Save your favorite configurations using the preset system</li>
-            <li>Watch your waveform in real-time using the oscilloscope</li>
-        </ul>
-        <p>Experiment with different combinations of modules and parameters to create unique sounds!</p>
-    </div>
-</div>
-
-<div class="synth-container hidden">
-    <div class="module">
-        <div class="module-label">VCO</div>
-        <div class="module-header">
-            <h2>Oscillator</h2>
-            <label class="switch">
-                <input type="checkbox" class="module-switch" data-module="vco" checked>
-                <span class="switch-slider"></span>
-            </label>
+<html><head><base href=".">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resonance</title>
+    <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="menu-container" id="mainMenu">
+            <h1 class="menu-title">RESONANCE</h1>
+            <button class="menu-button" id="startButton">Start</button>
+            <button class="menu-button" id="instructionsButton">Instructions</button>
         </div>
-        <div class="module-description">
-            Voltage Controlled Oscillator - Generates the basic waveform of the sound. Frequency determines the pitch of the note, while the waveform affects the timbre of the sound.
+        
+        <div class="instructions-modal" id="instructionsModal">
+            <button class="close-button" id="closeInstructions">&#xd7;</button>
+            <h2 class="instructions-title">How to Use</h2>
+            <div class="instructions-text">
+                <p>Welcome to the Resonance! Here&apos;s how to get started:</p>
+                <ul>
+                    <li>Use the VCO (Voltage Controlled Oscillator) to generate basic waveforms</li>
+                    <li>Apply filters and effects by toggling their switches and adjusting parameters</li>
+                    <li>The Envelope controls how the sound evolves over time</li>
+                    <li>Use the LFO to add modulation to your sound</li>
+                    <li>The sequencer allows you to create melodic patterns</li>
+                    <li>Save your favorite configurations using the preset system</li>
+                    <li>Watch your waveform in real-time using the oscilloscope</li>
+                </ul>
+                <p>Experiment with different combinations of modules and parameters to create unique sounds!</p>
+            </div>
         </div>
-        <div class="slider-container">
-            <span>Frequency</span>
-            <input type="range" min="1" max="2000" value="440" class="slider" id="frequency">
-            <span id="freqValue">440 Hz</span>
+        
+        <div class="synth-container hidden">
+            <div class="module">
+                <div class="module-label">VCO</div>
+                <div class="module-header">
+                    <h2>Oscillator</h2>
+                    <label class="switch">
+                        <input type="checkbox" class="module-switch" data-module="vco" checked>
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                <div class="module-description">
+                    Voltage Controlled Oscillator - Generates the basic waveform of the sound. Frequency determines the pitch of the note, while the waveform affects the timbre of the sound.
+                </div>
+                <div class="slider-container">
+                    <span>Frequency</span>
+                    <input type="range" min="1" max="2000" value="440" class="slider" id="frequency">
+                    <span id="freqValue">440 Hz</span>
+                </div>
+                <div class="slider-container">
+                    <span>Type</span>
+                    <select id="waveform" class="button">
+                        <option value="sine">Sine</option>
+                        <option value="square">Square</option>
+                        <option value="sawtooth">Sawtooth</option>
+                        <option value="triangle">Triangle</option>
+                    </select>
+                </div>
+            </div>
+        
+            <div class="module" data-effect="true">
+                <div class="module-label">REV1</div>
+                <div class="module-header">
+                    <h2>Reverb 1</h2>
+                    <label class="switch">
+                        <input type="checkbox" class="module-switch" data-module="reverb1">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                <div class="module-description">
+                    Reverb - Simulates the acoustics of a physical space, adding depth and spatiality to the sound through multiple reflections.
+                </div>
+                <div class="slider-container">
+                    <span>Mix</span>
+                    <input type="range" min="0" max="100" value="50" class="slider" id="reverbMix1">
+                    <span id="reverbMix1Value">50%</span>
+                </div>
+                <div class="slider-container">
+                    <span>Decay</span>
+                    <input type="range" min="0.1" max="10" step="0.1" value="2" class="slider" id="reverbDecay1">
+                    <span id="reverbDecay1Value">2.0s</span>
+                </div>
+            </div>
+        
+            <div class="module">
+                <div class="module-label">LFO</div>
+                <div class="module-header">
+                    <h2>Low Frequency Oscillator</h2>
+                    <label class="switch">
+                        <input type="checkbox" class="module-switch" data-module="lfo">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                <div class="module-description">
+                    Low Frequency Oscillator - Generates low frequency oscillations to modulate other parameters. Can be used to create vibrato, tremolo and other modulation effects.
+                </div>
+                <div class="slider-container">
+                    <span>LFO Frequency</span>
+                    <input type="range" min="0.01" max="20" step="0.01" value="1" class="slider" id="lfoFrequency">
+                    <span id="lfoFreqValue">1 Hz</span>
+                </div>
+                <div class="slider-container">
+                    <span>Intensity</span>
+                    <input type="range" min="0" max="100" value="50" class="slider" id="lfoAmount">
+                    <span id="lfoAmountValue">50%</span>
+                </div>
+                <div class="slider-container">
+                    <span>LFO Type</span>
+                    <select id="lfoWaveform" class="button">
+                        <option value="sine">Sine</option>
+                        <option value="triangle">Triangle</option>
+                        <option value="square">Square</option>
+                    </select>
+                </div>
+            </div>
+        
+            <div class="module" data-filter="true">
+                <div class="module-label">VCF</div>
+                <div class="module-header">
+                    <h2>Filter</h2>
+                    <label class="switch">
+                        <input type="checkbox" class="module-switch" data-module="vcf">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                <div class="module-description">
+                    Voltage Controlled Filter - Modifies the harmonic content of the sound. The cutoff determines the cutoff frequency, while resonance emphasizes frequencies around the cutoff point.
+                </div>
+                <div class="slider-container">
+                    <span>Cutoff</span>
+                    <input type="range" min="20" max="20000" value="1000" class="slider" id="cutoff">
+                    <span id="cutoffValue">1000 Hz</span>
+                </div>
+                <div class="slider-container">
+                    <span>Resonance</span>
+                    <input type="range" min="0" max="30" value="0" class="slider" id="resonance">
+                    <span id="resValue">0</span>
+                </div>
+            </div>
+        
+            <div class="module" data-filter="true">
+                <div class="module-label">LPF2</div>
+                <div class="module-header">
+                    <h2>LP Filter 2-Pole</h2>
+                    <label class="switch">
+                        <input type="checkbox" class="module-switch" data-module="lpf2">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                <div class="module-description">
+                    2-Pole Low Pass Filter - 12dB/octave. Offers a gentler frequency cut compared to the standard filter. Cutoff determines the cutoff frequency, resonance emphasizes frequencies around the cutoff point.
+                </div>
+                <div class="slider-container">
+                    <span>Cutoff</span>
+                    <input type="range" min="20" max="20000" value="2000" class="slider" id="lpf2Cutoff">
+                    <span id="lpf2CutoffValue">2000 Hz</span>
+                </div>
+                <div class="slider-container">
+                    <span>Resonance</span>
+                    <input type="range" min="0" max="30" value="0" class="slider" id="lpf2Resonance">
+                    <span id="lpf2ResValue">0</span>
+                </div>
+            </div>
+        
+            <div class="module" data-filter="true">
+                <div class="module-label">LPF4</div>
+                <div class="module-header">
+                    <h2>LP Filter 4-Pole</h2>
+                    <label class="switch">
+                        <input type="checkbox" class="module-switch" data-module="lpf4">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                <div class="module-description">
+                    4-Pole Low Pass Filter - 24dB/octave. Offers a steeper frequency cut compared to 2-pole filters. Cutoff determines the cutoff frequency, resonance emphasizes frequencies around the cutoff point.
+                </div>
+                <div class="slider-container">
+                    <span>Cutoff</span>
+                    <input type="range" min="20" max="20000" value="2000" class="slider" id="lpf4Cutoff">
+                    <span id="lpf4CutoffValue">2000 Hz</span>
+                </div>
+                <div class="slider-container">
+                    <span>Resonance</span>
+                    <input type="range" min="0" max="30" value="0" class="slider" id="lpf4Resonance">
+                    <span id="lpf4ResValue">0</span>
+                </div>
+            </div>
+        
+            <div class="module">
+                <div class="module-label">ENV</div>
+                <div class="module-header">
+                    <h2>Envelope</h2>
+                    <label class="switch">
+                        <input type="checkbox" class="module-switch" data-module="env">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                <div class="module-description">
+                    Envelope Generator - Controls how the sound evolves over time. Attack determines how quickly the sound reaches maximum volume, release determines how quickly it fades out.
+                </div>
+                <div class="slider-container">
+                    <span>Attack</span>
+                    <input type="range" min="0" max="4" step="0.01" value="0.1" class="slider" id="attack">
+                    <span id="attackValue">0.1s</span>
+                </div>
+                <div class="slider-container">
+                    <span>Release</span>
+                    <input type="range" min="0" max="4" step="0.01" value="0.1" class="slider" id="release">
+                    <span id="releaseValue">0.1s</span>
+                </div>
+            </div>
+        
+            <div class="module" data-effect="true">
+                <div class="module-label">ECHO</div>
+                <div class="module-header">
+                    <h2>Echo</h2>
+                    <label class="switch">
+                        <input type="checkbox" class="module-switch" data-module="echo">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                <div class="module-description">
+                    Echo - Creates rhythmic repetitions of the input signal. Time determines the interval between repetitions, while feedback controls how many times the signal is repeated.
+                </div>
+                <div class="slider-container">
+                    <span>Time</span>
+                    <input type="range" min="0.05" max="1" step="0.01" value="0.3" class="slider" id="echoTime">
+                    <span id="echoTimeValue">0.3s</span>
+                </div>
+                <div class="slider-container">
+                    <span>Feedback</span>
+                    <input type="range" min="0" max="90" value="40" class="slider" id="echoFeedback">
+                    <span id="echoFeedbackValue">40%</span>
+                </div>
+                <div class="slider-container">
+                    <span>Mix</span>
+                    <input type="range" min="0" max="100" value="50" class="slider" id="echoMix">
+                    <span id="echoMixValue">50%</span>
+                </div>
+            </div>
+        
+            <div class="module" data-effect="true">
+                <div class="module-label">DIST</div>
+                <div class="module-header">
+                    <h2>Distortion</h2>
+                    <label class="switch">
+                        <input type="checkbox" class="module-switch" data-module="dist">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                <div class="module-description">
+                    Distortion - Adds saturation and harmonics to the signal, creating a more aggressive and frequency-rich sound.
+                </div>
+                <div class="slider-container">
+                    <span>Drive</span>
+                    <input type="range" min="1" max="100" value="20" class="slider" id="distDrive">
+                    <span id="distDriveValue">20</span>
+                </div>
+                <div class="slider-container">
+                    <span>Mix</span>
+                    <input type="range" min="0" max="100" value="50" class="slider" id="distMix">
+                    <span id="distMixValue">50%</span>
+                </div>
+            </div>
+        
+            <div class="module" data-effect="true">
+                <div class="module-label">FLNG</div>
+                <div class="module-header">
+                    <h2>Flanger</h2>
+                    <label class="switch">
+                        <input type="checkbox" class="module-switch" data-module="flanger">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                <div class="module-description">
+                    Flanger - Creates a modulation effect that combines the original signal with a slightly delayed and modulated copy, producing a characteristic &quot;swirling&quot; sound.
+                </div>
+                <div class="slider-container">
+                    <span>Delay Time</span>
+                    <input type="range" min="0.001" max="0.02" step="0.001" value="0.005" class="slider" id="flangerDelay">
+                    <span id="flangerDelayValue">0.005s</span>
+                </div>
+                <div class="slider-container">
+                    <span>Depth</span>
+                    <input type="range" min="0.0001" max="0.005" step="0.0001" value="0.002" class="slider" id="flangerDepth">
+                    <span id="flangerDepthValue">0.002</span>
+                </div>
+                <div class="slider-container">
+                    <span>Rate</span>
+                    <input type="range" min="0.05" max="5" step="0.05" value="0.5" class="slider" id="flangerRate">
+                    <span id="flangerRateValue">0.5 Hz</span>
+                </div>
+                <div class="slider-container">
+                    <span>Feedback</span>
+                    <input type="range" min="0" max="0.9" step="0.1" value="0.5" class="slider" id="flangerFeedback">
+                    <span id="flangerFeedbackValue">0.5</span>
+                </div>
+            </div>
+        
+            <div class="module" data-effect="true">
+                <div class="module-label">CHRS</div>
+                <div class="module-header">
+                    <h2>Chorus</h2>
+                    <label class="switch">
+                        <input type="checkbox" class="module-switch" data-module="chorus">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                <div class="module-description">
+                    Chorus - Creates an ensemble effect by adding slightly detuned and modulated voices, simulating multiple instruments playing together.
+                </div>
+                <div class="slider-container">
+                    <span>Rate</span>
+                    <input type="range" min="0.1" max="8" step="0.1" value="1.5" class="slider" id="chorusRate">
+                    <span id="chorusRateValue">1.5 Hz</span>
+                </div>
+                <div class="slider-container">
+                    <span>Delay</span>
+                    <input type="range" min="0.005" max="0.03" step="0.001" value="0.01" class="slider" id="chorusDelay">
+                    <span id="chorusDelayValue">0.01s</span>
+                </div>
+                <div class="slider-container">
+                    <span>Depth</span>
+                    <input type="range" min="0.0001" max="0.005" step="0.0001" value="0.002" class="slider" id="chorusDepth">
+                    <span id="chorusDepthValue">0.002</span>
+                </div>
+                <div class="slider-container">
+                    <span>Mix</span>
+                    <input type="range" min="0" max="100" value="50" class="slider" id="chorusMix">
+                    <span id="chorusMixValue">50%</span>
+                </div>
+            </div>
+        
+            <div class="module">
+                <div class="module-label">SEQ</div>
+                <div class="module-header">
+                    <h2>Sequencer</h2>
+                    <label class="switch">
+                        <input type="checkbox" class="module-switch" data-module="seq">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                <div class="module-description">
+                    Sequencer - Allows you to create repetitive melodic sequences. Select notes and tempo of the sequence. Click buttons to activate/deactivate steps. Use BPM control to adjust speed.
+                </div>
+                <div class="slider-container">
+                    <span>BPM</span>
+                    <input type="range" min="30" max="240" value="120" class="slider" id="seqBPM">
+                    <span id="seqBPMValue">120</span>
+                </div>
+                <div class="slider-container">
+                    <span>Steps</span>
+                    <select id="seqSteps" class="button">
+                        <option value="8">8 Steps</option>
+                        <option value="16">16 Steps</option>
+                        <option value="32">32 Steps</option>
+                    </select>
+                </div>
+                <div id="sequencerGrid" class="sequencer-grid">
+                </div>
+                <div class="sequencer-controls">
+                    <button class="button" id="seqPlay">Play Sequence</button>
+                    <button class="button" id="seqClear">Clear All</button>
+                </div>
+            </div>
+        
+            <div class="module">
+                <button id="playButton" class="button">START/STOP</button>
+                <div style="text-align: center; margin-top: 10px;">
+                    <div id="led" class="led"></div>
+                </div>
+            </div>
+        
+            <div class="module">
+                <div class="module-label">SCOPE</div>
+                <div class="module-header">
+                    <h2>Oscilloscope</h2>
+                    <label class="switch">
+                        <input type="checkbox" class="module-switch" data-module="scope" checked>
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                <div class="module-description">
+                    Oscilloscope - Displays the waveform of the signal in real-time, allowing you to observe the sound characteristics in the time domain.
+                </div>
+                <canvas id="oscilloscope" width="600" height="200"></canvas>
+            </div>
+        
+            <div class="module">
+                <div class="module-label">PRESET</div>
+                <div class="module-header">
+                    <h2>Configurations</h2>
+                </div>
+                <div class="module-description">
+                    Save and load up to 10 different configurations of the synthesizer.
+                </div>
+                <div class="preset-buttons">
+                    <button class="button preset-save">Save Configuration</button>
+                    <select id="presetSlot" class="button">
+                      <option value="1">Slot 1</option>
+                      <option value="2">Slot 2</option>
+                      <option value="3">Slot 3</option>
+                      <option value="4">Slot 4</option>
+                      <option value="5">Slot 5</option>
+                      <option value="6">Slot 6</option>
+                      <option value="7">Slot 7</option>
+                      <option value="8">Slot 8</option>
+                      <option value="9">Slot 9</option>
+                      <option value="10">Slot 10</option>
+                    </select>
+                    <button class="button preset-load">Load Configuration</button>
+                    <button class="button preset-download fully-clickable" id="downloadButton">Download Configuration</button>
+                </div>
+            </div>
         </div>
-        <div class="slider-container">
-            <span>Type</span>
-            <select id="waveform" class="button">
-                <option value="sine">Sine</option>
-                <option value="square">Square</option>
-                <option value="sawtooth">Sawtooth</option>
-                <option value="triangle">Triangle</option>
-            </select>
+        
+        <div id="saveNotification" class="popup-notification">
+            Configuration saved successfully!
         </div>
-    </div>
-
-    <div class="module" data-effect="true">
-        <div class="module-label">REV1</div>
-        <div class="module-header">
-            <h2>Reverb 1</h2>
-            <label class="switch">
-                <input type="checkbox" class="module-switch" data-module="reverb1">
-                <span class="switch-slider"></span>
-            </label>
+        
+        <div id="loadNotification" class="popup-notification">
+            Configuration loaded successfully!
         </div>
-        <div class="module-description">
-            Reverb - Simulates the acoustics of a physical space, adding depth and spatiality to the sound through multiple reflections.
+        
+        <div id="loadChoiceModal" class="modal">
+            <div class="modal-content">
+                <h2>Load Configuration</h2>
+                <div class="modal-buttons">
+                    <button class="menu-button" id="loadLocalStorage">Load from Local Storage</button>
+                    <button class="menu-button" id="loadDevice">Load from Device</button>
+                </div>
+            </div>
         </div>
-        <div class="slider-container">
-            <span>Mix</span>
-            <input type="range" min="0" max="100" value="50" class="slider" id="reverbMix1">
-            <span id="reverbMix1Value">50%</span>
+        
+        <div id="audioNotification" class="popup-notification">
+            Recording in progress...
         </div>
-        <div class="slider-container">
-            <span>Decay</span>
-            <input type="range" min="0.1" max="10" step="0.1" value="2" class="slider" id="reverbDecay1">
-            <span id="reverbDecay1Value">2.0s</span>
+        
+        <div id="downloadChoiceModal" class="modal">
+            <div class="modal-content">
+                <h2>Download Configuration</h2>
+                <div class="modal-buttons">
+                    <button class="menu-button" id="downloadConfig">Download Config (JSON)</button>
+                    <button class="menu-button" id="downloadAudio">Download Audio (MP3)</button>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div class="module">
-        <div class="module-label">LFO</div>
-        <div class="module-header">
-            <h2>Low Frequency Oscillator</h2>
-            <label class="switch">
-                <input type="checkbox" class="module-switch" data-module="lfo">
-                <span class="switch-slider"></span>
-            </label>
-        </div>
-        <div class="module-description">
-            Low Frequency Oscillator - Generates low frequency oscillations to modulate other parameters. Can be used to create vibrato, tremolo and other modulation effects.
-        </div>
-        <div class="slider-container">
-            <span>LFO Frequency</span>
-            <input type="range" min="0.01" max="20" step="0.01" value="1" class="slider" id="lfoFrequency">
-            <span id="lfoFreqValue">1 Hz</span>
-        </div>
-        <div class="slider-container">
-            <span>Intensity</span>
-            <input type="range" min="0" max="100" value="50" class="slider" id="lfoAmount">
-            <span id="lfoAmountValue">50%</span>
-        </div>
-        <div class="slider-container">
-            <span>LFO Type</span>
-            <select id="lfoWaveform" class="button">
-                <option value="sine">Sine</option>
-                <option value="triangle">Triangle</option>
-                <option value="square">Square</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="module" data-filter="true">
-        <div class="module-label">VCF</div>
-        <div class="module-header">
-            <h2>Filter</h2>
-            <label class="switch">
-                <input type="checkbox" class="module-switch" data-module="vcf">
-                <span class="switch-slider"></span>
-            </label>
-        </div>
-        <div class="module-description">
-            Voltage Controlled Filter - Modifies the harmonic content of the sound. The cutoff determines the cutoff frequency, while resonance emphasizes frequencies around the cutoff point.
-        </div>
-        <div class="slider-container">
-            <span>Cutoff</span>
-            <input type="range" min="20" max="20000" value="1000" class="slider" id="cutoff">
-            <span id="cutoffValue">1000 Hz</span>
-        </div>
-        <div class="slider-container">
-            <span>Resonance</span>
-            <input type="range" min="0" max="30" value="0" class="slider" id="resonance">
-            <span id="resValue">0</span>
-        </div>
-    </div>
-
-    <div class="module" data-filter="true">
-        <div class="module-label">LPF2</div>
-        <div class="module-header">
-            <h2>LP Filter 2-Pole</h2>
-            <label class="switch">
-                <input type="checkbox" class="module-switch" data-module="lpf2">
-                <span class="switch-slider"></span>
-            </label>
-        </div>
-        <div class="module-description">
-            2-Pole Low Pass Filter - 12dB/octave. Offers a gentler frequency cut compared to the standard filter. Cutoff determines the cutoff frequency, resonance emphasizes frequencies around the cutoff point.
-        </div>
-        <div class="slider-container">
-            <span>Cutoff</span>
-            <input type="range" min="20" max="20000" value="2000" class="slider" id="lpf2Cutoff">
-            <span id="lpf2CutoffValue">2000 Hz</span>
-        </div>
-        <div class="slider-container">
-            <span>Resonance</span>
-            <input type="range" min="0" max="30" value="0" class="slider" id="lpf2Resonance">
-            <span id="lpf2ResValue">0</span>
-        </div>
-    </div>
-
-    <div class="module" data-filter="true">
-        <div class="module-label">LPF4</div>
-        <div class="module-header">
-            <h2>LP Filter 4-Pole</h2>
-            <label class="switch">
-                <input type="checkbox" class="module-switch" data-module="lpf4">
-                <span class="switch-slider"></span>
-            </label>
-        </div>
-        <div class="module-description">
-            4-Pole Low Pass Filter - 24dB/octave. Offers a steeper frequency cut compared to 2-pole filters. Cutoff determines the cutoff frequency, resonance emphasizes frequencies around the cutoff point.
-        </div>
-        <div class="slider-container">
-            <span>Cutoff</span>
-            <input type="range" min="20" max="20000" value="2000" class="slider" id="lpf4Cutoff">
-            <span id="lpf4CutoffValue">2000 Hz</span>
-        </div>
-        <div class="slider-container">
-            <span>Resonance</span>
-            <input type="range" min="0" max="30" value="0" class="slider" id="lpf4Resonance">
-            <span id="lpf4ResValue">0</span>
-        </div>
-    </div>
-
-    <div class="module">
-        <div class="module-label">ENV</div>
-        <div class="module-header">
-            <h2>Envelope</h2>
-            <label class="switch">
-                <input type="checkbox" class="module-switch" data-module="env">
-                <span class="switch-slider"></span>
-            </label>
-        </div>
-        <div class="module-description">
-            Envelope Generator - Controls how the sound evolves over time. Attack determines how quickly the sound reaches maximum volume, release determines how quickly it fades out.
-        </div>
-        <div class="slider-container">
-            <span>Attack</span>
-            <input type="range" min="0" max="4" step="0.01" value="0.1" class="slider" id="attack">
-            <span id="attackValue">0.1s</span>
-        </div>
-        <div class="slider-container">
-            <span>Release</span>
-            <input type="range" min="0" max="4" step="0.01" value="0.1" class="slider" id="release">
-            <span id="releaseValue">0.1s</span>
-        </div>
-    </div>
-
-    <div class="module" data-effect="true">
-        <div class="module-label">ECHO</div>
-        <div class="module-header">
-            <h2>Echo</h2>
-            <label class="switch">
-                <input type="checkbox" class="module-switch" data-module="echo">
-                <span class="switch-slider"></span>
-            </label>
-        </div>
-        <div class="module-description">
-            Echo - Creates rhythmic repetitions of the input signal. Time determines the interval between repetitions, while feedback controls how many times the signal is repeated.
-        </div>
-        <div class="slider-container">
-            <span>Time</span>
-            <input type="range" min="0.05" max="1" step="0.01" value="0.3" class="slider" id="echoTime">
-            <span id="echoTimeValue">0.3s</span>
-        </div>
-        <div class="slider-container">
-            <span>Feedback</span>
-            <input type="range" min="0" max="90" value="40" class="slider" id="echoFeedback">
-            <span id="echoFeedbackValue">40%</span>
-        </div>
-        <div class="slider-container">
-            <span>Mix</span>
-            <input type="range" min="0" max="100" value="50" class="slider" id="echoMix">
-            <span id="echoMixValue">50%</span>
-        </div>
-    </div>
-
-    <div class="module" data-effect="true">
-        <div class="module-label">DIST</div>
-        <div class="module-header">
-            <h2>Distortion</h2>
-            <label class="switch">
-                <input type="checkbox" class="module-switch" data-module="dist">
-                <span class="switch-slider"></span>
-            </label>
-        </div>
-        <div class="module-description">
-            Distortion - Adds saturation and harmonics to the signal, creating a more aggressive and frequency-rich sound.
-        </div>
-        <div class="slider-container">
-            <span>Drive</span>
-            <input type="range" min="1" max="100" value="20" class="slider" id="distDrive">
-            <span id="distDriveValue">20</span>
-        </div>
-        <div class="slider-container">
-            <span>Mix</span>
-            <input type="range" min="0" max="100" value="50" class="slider" id="distMix">
-            <span id="distMixValue">50%</span>
-        </div>
-    </div>
-
-    <div class="module" data-effect="true">
-        <div class="module-label">FLNG</div>
-        <div class="module-header">
-            <h2>Flanger</h2>
-            <label class="switch">
-                <input type="checkbox" class="module-switch" data-module="flanger">
-                <span class="switch-slider"></span>
-            </label>
-        </div>
-        <div class="module-description">
-            Flanger - Creates a modulation effect that combines the original signal with a slightly delayed and modulated copy, producing a characteristic &quot;swirling&quot; sound.
-        </div>
-        <div class="slider-container">
-            <span>Delay Time</span>
-            <input type="range" min="0.001" max="0.02" step="0.001" value="0.005" class="slider" id="flangerDelay">
-            <span id="flangerDelayValue">0.005s</span>
-        </div>
-        <div class="slider-container">
-            <span>Depth</span>
-            <input type="range" min="0.0001" max="0.005" step="0.0001" value="0.002" class="slider" id="flangerDepth">
-            <span id="flangerDepthValue">0.002</span>
-        </div>
-        <div class="slider-container">
-            <span>Rate</span>
-            <input type="range" min="0.05" max="5" step="0.05" value="0.5" class="slider" id="flangerRate">
-            <span id="flangerRateValue">0.5 Hz</span>
-        </div>
-        <div class="slider-container">
-            <span>Feedback</span>
-            <input type="range" min="0" max="0.9" step="0.1" value="0.5" class="slider" id="flangerFeedback">
-            <span id="flangerFeedbackValue">0.5</span>
-        </div>
-    </div>
-
-    <div class="module" data-effect="true">
-        <div class="module-label">CHRS</div>
-        <div class="module-header">
-            <h2>Chorus</h2>
-            <label class="switch">
-                <input type="checkbox" class="module-switch" data-module="chorus">
-                <span class="switch-slider"></span>
-            </label>
-        </div>
-        <div class="module-description">
-            Chorus - Creates an ensemble effect by adding slightly detuned and modulated voices, simulating multiple instruments playing together.
-        </div>
-        <div class="slider-container">
-            <span>Rate</span>
-            <input type="range" min="0.1" max="8" step="0.1" value="1.5" class="slider" id="chorusRate">
-            <span id="chorusRateValue">1.5 Hz</span>
-        </div>
-        <div class="slider-container">
-            <span>Delay</span>
-            <input type="range" min="0.005" max="0.03" step="0.001" value="0.01" class="slider" id="chorusDelay">
-            <span id="chorusDelayValue">0.01s</span>
-        </div>
-        <div class="slider-container">
-            <span>Depth</span>
-            <input type="range" min="0.0001" max="0.005" step="0.0001" value="0.002" class="slider" id="chorusDepth">
-            <span id="chorusDepthValue">0.002</span>
-        </div>
-        <div class="slider-container">
-            <span>Mix</span>
-            <input type="range" min="0" max="100" value="50" class="slider" id="chorusMix">
-            <span id="chorusMixValue">50%</span>
-        </div>
-    </div>
-
-    <div class="module">
-        <div class="module-label">SEQ</div>
-        <div class="module-header">
-            <h2>Sequencer</h2>
-            <label class="switch">
-                <input type="checkbox" class="module-switch" data-module="seq">
-                <span class="switch-slider"></span>
-            </label>
-        </div>
-        <div class="module-description">
-            Sequencer - Allows you to create repetitive melodic sequences. Select notes and tempo of the sequence. Click buttons to activate/deactivate steps. Use BPM control to adjust speed.
-        </div>
-        <div class="slider-container">
-            <span>BPM</span>
-            <input type="range" min="30" max="240" value="120" class="slider" id="seqBPM">
-            <span id="seqBPMValue">120</span>
-        </div>
-        <div class="slider-container">
-            <span>Steps</span>
-            <select id="seqSteps" class="button">
-                <option value="8">8 Steps</option>
-                <option value="16">16 Steps</option>
-                <option value="32">32 Steps</option>
-            </select>
-        </div>
-        <div id="sequencerGrid" class="sequencer-grid">
-        </div>
-        <div class="sequencer-controls">
-            <button class="button" id="seqPlay">Play Sequence</button>
-            <button class="button" id="seqClear">Clear All</button>
-        </div>
-    </div>
-
-    <div class="module">
-        <button id="playButton" class="button">START/STOP</button>
-        <div style="text-align: center; margin-top: 10px;">
-            <div id="led" class="led"></div>
-        </div>
-    </div>
-
-    <div class="module">
-        <div class="module-label">SCOPE</div>
-        <div class="module-header">
-            <h2>Oscilloscope</h2>
-            <label class="switch">
-                <input type="checkbox" class="module-switch" data-module="scope" checked>
-                <span class="switch-slider"></span>
-            </label>
-        </div>
-        <div class="module-description">
-            Oscilloscope - Displays the waveform of the signal in real-time, allowing you to observe the sound characteristics in the time domain.
-        </div>
-        <canvas id="oscilloscope" width="600" height="200"></canvas>
-    </div>
-
-    <div class="module">
-        <div class="module-label">PRESET</div>
-        <div class="module-header">
-            <h2>Configurations</h2>
-        </div>
-        <div class="module-description">
-            Save and load up to 10 different configurations of the synthesizer.
-        </div>
-        <div class="preset-buttons">
-            <button class="button preset-save">Save Configuration</button>
-            <select id="presetSlot" class="button">
-              <option value="1">Slot 1</option>
-              <option value="2">Slot 2</option>
-              <option value="3">Slot 3</option>
-              <option value="4">Slot 4</option>
-              <option value="5">Slot 5</option>
-              <option value="6">Slot 6</option>
-              <option value="7">Slot 7</option>
-              <option value="8">Slot 8</option>
-              <option value="9">Slot 9</option>
-              <option value="10">Slot 10</option>
-            </select>
-            <button class="button preset-load">Load Configuration</button>
-        </div>
-    </div>
-</div>
-
-<div id="saveNotification" class="popup-notification">
-    Configuration saved successfully!
-</div>
-
-<div id="loadNotification" class="popup-notification">
-    Configuration loaded successfully!
-</div>
-
-<div id="audioNotification" class="popup-notification">
-    Recording in progress...
-</div>
-
-<script src="script.js"></script>
-</body></html>
+    <script src="script.js"></script>
+    </body></html>
